@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head><title>Новини за категорією</title></head>
+<body>
+    <h1>Виберіть категорію</h1>
+
+    <form method="post">
+        <select name="category_id" required>
+            {% for cat in categories %}
+                <option value="{{ cat.id }}" {% if selected_category and selected_category.id == cat.id %}selected{% endif %}>
+                    {{ cat.name }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit">Показати</button>
+    </form>
+
+    {% if news %}
+        <h2>Новини у категорії: {{ selected_category.name }}</h2>
+        <hr>
+        {% for n in news %}
+            <h3>{{ n.title }}</h3>
+            <p>{{ n.content }}</p>
+            <small>Автор: {{ n.user.username if n.user else "Невідомий" }}</small>
+            <small>Автор: {{ n.user.username if n.user else "Невідомий" }} (ID: {{ n.user.id if n.user else "?" }})</small>
+            <hr>
+        {% endfor %}
+    {% elif selected_category %}
+        <p>Новин у цій категорії немає.</p>
+    {% endif %}
+
+    <br><a href="/?role={{ role }}">Назад</a>
+</body>
+</html>

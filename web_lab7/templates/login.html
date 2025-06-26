@@ -1,0 +1,8 @@
+<h1>Вхід</h1>
+<form method="post">
+    {{ form.hidden_tag() }}
+    {{ form.username.label }} {{ form.username() }}<br>
+    {{ form.password.label }} {{ form.password() }}<br>
+    {{ form.submit() }}
+</form>
+<a href="{{ url_for('auth.register') }}">Немає акаунта? Зареєструватися</a>

@@ -1,0 +1,9 @@
+<h1>{{ action }} новину</h1>
+<form method="post">
+    {{ form.hidden_tag() }}
+    {{ form.title.label }}<br>{{ form.title(size=40) }}<br><br>
+    {{ form.content.label }}<br>{{ form.content(rows=5, cols=60) }}<br><br>
+    {{ form.category.label }}<br>{{ form.category() }}<br><br>
+    <button type="submit">{{ action }}</button>
+</form>
+<a href="{{ url_for('index') }}">Назад</a>

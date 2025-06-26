@@ -1,0 +1,24 @@
+{% if current_user.is_authenticated %}
+  👋 Привіт, {{ current_user.username }} |
+  <a href="{{ url_for('auth.logout') }}">Вийти</a><br>
+  {% if current_user.is_admin %}
+    <a href="{{ url_for('admin_panel') }}">Панель адміністратора</a><br>
+  {% endif %}
+{% else %}
+  <a href="{{ url_for('auth.login') }}">Увійти</a> |
+  <a href="{{ url_for('auth.register') }}">Зареєструватися</a><br>
+{% endif %}
+<hr>
+
+<h1>Новини</h1>
+<a href="{{ url_for('add_news') }}">+ Створити новину</a><br>
+
+<ul>
+  {% for item in news_list %}
+    <li>
+      <a href="{{ url_for('news_detail', news_id=item.id) }}">{{ item.title }}</a>
+      [<a href="{{ url_for('edit_news', news_id=item.id) }}">Редагувати</a>]
+      [<a href="{{ url_for('confirm_delete', news_id=item.id) }}">Видалити</a>]
+    </li>
+  {% endfor %}
+</ul>

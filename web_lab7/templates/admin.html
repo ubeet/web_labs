@@ -1,0 +1,7 @@
+<h1>Панель адміністратора</h1>
+<ul>
+{% for user in users %}
+  <li>{{ user.username }} — {% if user.is_admin %}Адмін{% else %}Користувач{% endif %}</li>
+{% endfor %}
+</ul>
+<a href="{{ url_for('index') }}">Назад</a>

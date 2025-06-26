@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Головна - ІС Новини</title>
+</head>
+<body>
+    <h1>Новини</h1>
+
+    {% if role == "admin" %}
+    <form action="/add" method="post">
+        <input name="title" placeholder="Заголовок" required><br><br>
+        <textarea name="content" placeholder="Контент" required></textarea><br><br>
+
+        <select name="category_id" required>
+    {% for cat in categories %}
+        <option value="{{ cat._id }}">{{ cat.name }}</option>
+    {% endfor %}
+</select><br><br>
+
+<select name="user_id" required>
+    {% for user in users %}
+        <option value="{{ user._id }}">{{ user.username }}</option>
+    {% endfor %}
+</select><br><br>
+
+
+        <button type="submit">Додати</button>
+    </form>
+    {% endif %}
+
+    <hr>
+
+    {% for n in news %}
+        <h2><a href="/news/{{ n.id }}?role={{ role }}">{{ n.title }}</a></h2>
+        <p>{{ n.content }}</p>
+        <small>Категорія: {{ n.category.name if n.category else "Без категорії" }}</small><br>
+        <small>Автор: {{ n.user.username if n.user else "Невідомий" }} (ID: {{ n.user._id if n.user else "?" }})</small><br>
+        {% if role == "admin" %}
+            <a href="/delete/{{ n._id }}">Видалити</a>
+        {% endif %}
+        <hr>
+    {% endfor %}
+</body>
+</html>

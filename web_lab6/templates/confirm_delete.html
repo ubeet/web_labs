@@ -1,0 +1,6 @@
+<h1>Видалити "{{ news_item.title }}"?</h1>
+<form method="post">
+    {{ form.hidden_tag() }}
+    <button type="submit">Так</button>
+</form>
+<a href="{{ url_for('index') }}">Скасувати</a>

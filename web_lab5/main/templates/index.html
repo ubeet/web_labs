@@ -1,0 +1,21 @@
+<h1>Новини</h1>
+{% if request.session.is_admin %}
+  <a href="{% url 'news_create' %}">+ Створити новину</a><br>
+  <a href="{% url 'logout_admin_mode' %}">Вийти з адмін-режиму</a>
+{% else %}
+  <a href="{% url 'set_admin_mode' %}">Увійти як адмін</a>
+{% endif %}
+
+
+<ul>
+  {% for item in news %}
+    <li>
+      <a href="{% url 'news_detail' item.id %}">{{ item.title }}</a>
+      {% if request.session.is_admin %}
+        [<a href="{% url 'news_edit' item.id %}">Редагувати</a>]
+        [<a href="{% url 'news_delete' item.id %}">Видалити</a>]
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+

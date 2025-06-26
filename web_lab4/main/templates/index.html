@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head><title>Новини</title></head>
+<body>
+    <h1>Новини</h1>
+    <ul>
+        {% for item in news %}
+            <li><a href="{% url 'news_detail' item.id %}">{{ item.title }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

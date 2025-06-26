@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head><title>Редагування новини</title></head>
+<body>
+    <h1>Редагувати новину</h1>
+
+    {% if role == "admin" %}
+    <form action="/news/{{ news.id }}" method="post">
+        <input type="text" name="title" value="{{ news.title }}" required><br><br>
+        <textarea name="content" required>{{ news.content }}</textarea><br><br>
+
+    <select name="category_id" required>
+        {% for cat in categories %}
+            <option value="{{ cat.id }}" {% if cat.id == news.category_id %}selected{% endif %}>{{ cat.name }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <select name="user_id" required>
+    {% for user in users %}
+        <option value="{{ user.id }}" {% if news.user and user.id == news.user.id %}selected{% endif %}>
+            {{ user.username }} (ID: {{ user.id }})
+        </option>
+    {% endfor %}
+</select><br><br>
+
+
+    <button type="submit">Зберегти</button>
+</form>
+    {% else %}
+        <h2>{{ news.title }}</h2>
+        <p>{{ news.content }}</p>
+        <small>Категорія: {{ news.category.name if news.category else "Без категорії" }}</small>
+    {% endif %}
+
+    <br><a href="/?role={{ role }}">Назад</a>
+
+</body>
+</html>
