@@ -4,7 +4,7 @@ from fastapi.templating import Jinja2Templates
 from bson import ObjectId, errors
 from mongo_db import news_col, users_col, categories_col
 
-app = FastAPI(title="Лаба 3 - FastAPI + MongoDB")
+app = FastAPI(title="Лаба 3")
 templates = Jinja2Templates(directory="html")
 
 @app.get("/", response_class=HTMLResponse)

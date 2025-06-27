@@ -6,7 +6,7 @@ class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
     username = Column(String, unique=True)
-    role = Column(String)  # "admin" або "user"
+    role = Column(String)
 
 class Category(Base):
     __tablename__ = "categories"
